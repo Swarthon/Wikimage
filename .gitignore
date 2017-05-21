@@ -1,0 +1,11 @@
+# Images created
+*.png
+
+# Site downloaded
+*.html
+
+# Obj
+*.o
+
+# Executable
+wikimage
