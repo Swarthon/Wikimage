@@ -55,10 +55,11 @@ int download(struct MemoryStruct* mem, char* url){
 	}
 
 	curl_easy_cleanup(easy);
+	return 0;
 }
 
 /* Functions to manipulate strings */
-char* substr_to(const char* src, const char last, char* result) {
+void substr_to(const char* src, const char last, char* result) {
 	int i = strchr(src, last) - src;
 	memcpy(result, src, i);
 	result[i] = '\0';
@@ -147,7 +148,7 @@ int main (int argc, char** argv) {
 	char description[500];
 	char image_url[500];
 	ExceptionInfo exception;
-	Image *image, *croped_image;
+	Image *image;
 	ImageInfo *image_info;
 	FILE* file;
 	int c;
