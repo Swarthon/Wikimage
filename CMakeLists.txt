@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.6)
 
 project(wikimage)
 
-add_executable(wikimage wikimage.c)
+add_executable(wikimage src/wikimage.c)
 
 find_package(CURL REQUIRED)
 if (CURL_FOUND)
