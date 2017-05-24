@@ -1,3 +1,5 @@
+#include "config.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,7 +11,9 @@
 #include <magick/MagickCore.h>
 #include <magick/draw.h>
 
+#ifdef USE_X11
 #include <X11/Xlib.h>
+#endif // USE_X11
 
 struct MemoryStruct {
 	char* memory;
@@ -152,9 +156,15 @@ int main (int argc, char** argv) {
 	ImageInfo *image_info;
 	FILE* file;
 	int c;
+
+#ifdef USE_X11
 	Display* d = XOpenDisplay(NULL);
 	Screen*  s = DefaultScreenOfDisplay(d);
 	int width = s->width, height = s->height;
+#else
+	int width = HEIGHT, height = HEIGHT;
+#endif
+
 	char* font = NULL;
 
 	while((c = getopt_long (argc, argv, "u:w:h:f:",long_options, 0)) != -1)

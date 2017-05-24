@@ -1,0 +1,3 @@
+#define WIDTH @IMAGE_WIDTH@
+#define HEIGHT @IMAGE_HEIGHT@
+#cmakedefine USE_X11
