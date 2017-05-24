@@ -6,12 +6,12 @@ This program is used to define a Wikimedia image as background image. It downloa
 Compiling
 ---------
 
-To use it, you will need to be on a Linux system (running X11), and have ImageMagick, curl libraries installed. Then run `make`
+To compile this software, you will need to run cmake. Some libraries are also required : ImageMagick, curl. If you have X11, you can also enable `USE_X11` option, which provide a screen size detection.
 
 Running
 -------
 
-To simply run the program like this `./wikimage`. If you want to use it as your desktop background image, run it once, then set your desktop image as the image you want (See [Naming](Naming) for more informations about what is what).
+To run the program, move to `bin` then run `./wikimage`. If you want to use it as your desktop background image, run it once, then set your desktop image as the image you want (See [Naming](Naming) for more informations about what is what).
 
 Naming
 ------
