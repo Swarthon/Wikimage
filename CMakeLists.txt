@@ -10,6 +10,15 @@ if (CURL_FOUND)
 	target_link_libraries (wikimage ${CURL_LIBRARIES})
 endif (CURL_FOUND)
 
+# ImageMagick
+# The ImageMagick library names come decorated with High Dynamic Range
+# configuration.
+# A compilation flag is required to choose the correct library.
+# Wikimake is not using HDRI
+add_definitions(-DMAGICKCORE_HDRI_ENABLE=0)
+# Same for Quantum Depth value where 16 is selected
+add_definitions(-DMAGICKCORE_QUANTUM_DEPTH=16)
+
 find_package(ImageMagick REQUIRED)
 find_package(ImageMagick COMPONENTS MagickCore REQUIRED)
 if (ImageMagick_FOUND)
