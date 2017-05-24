@@ -9,3 +9,8 @@
 
 # Executable
 wikimage
+
+# CMake
+CMakeFiles/
+cmake_install.cmake
+CMakeCache.txt
