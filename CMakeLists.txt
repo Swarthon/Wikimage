@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.6)
 project(wikimage)
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
-add_executable(wikimage src/wikimage.c)
+add_executable(wikimage src/wikimage.c src/image.c src/download.c src/string_manipulate.c)
 
 include_directories (include)
 configure_file (
