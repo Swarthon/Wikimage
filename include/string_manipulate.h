@@ -1,3 +1,15 @@
+/**
+  * File:	string_manipulate.h
+  *
+  * Date:	2017
+  * Software: 	Wikimage
+  *
+  * Summary of File:
+  *
+  *   This file includes the functions related to string manipulation
+  *
+  */
+
 #ifndef _STRING_MANIPULATE_H_
 #define _STRING_MANIPULATE_H_
 

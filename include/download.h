@@ -1,3 +1,15 @@
+/**
+  * File:	download.h
+  *
+  * Date:	2017
+  * Software: 	Wikimage
+  *
+  * Summary of File:
+  *
+  *   This file includes the functions related to download
+  *
+  */
+
 #ifndef _DOWNLOAD_H_
 #define _DOWNLOAD_H_
 

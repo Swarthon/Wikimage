@@ -1,3 +1,15 @@
+/**
+  * File:	image.h
+  *
+  * Date:	2017
+  * Software: 	Wikimage
+  *
+  * Summary of File:
+  *
+  *   This file includes the functions related to image manipulation
+  *
+  */
+
 #ifndef _IMAGE_H_
 #define _IMAGE_H_
 

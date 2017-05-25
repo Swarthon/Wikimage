@@ -1,3 +1,23 @@
+/**
+  *  __        ___ _    _
+  *  \ \      / (_) | _(_)_ __ ___   __ _  __ _  ___
+  *   \ \ /\ / /| | |/ / | '_ ` _ \ / _` |/ _` |/ _ \
+  *    \ V  V / | |   <| | | | | | | (_| | (_| |  __/
+  *     \_/\_/  |_|_|\_\_|_| |_| |_|\__,_|\__, |\___|
+  *
+  * File :	wikimage.c
+  *
+  * Date :	2017
+  * Software :	Wikimage
+  *
+  * Summary :
+  *
+  * This program is used to define a Wikimedia image as background image.
+  * It downloads, resize and crop to fit to your screen.
+  * It also adds a description of what it is.
+  *
+  */
+
 #include "config.h"
 
 #include <stdio.h>
