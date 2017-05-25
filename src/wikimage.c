@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #include <curl/curl.h>
 
@@ -90,7 +91,7 @@ void get_desc(struct MemoryStruct mem, char* description){
 }
 
 /* Image description */
-void init(Image** image, ImageInfo** image_info, ExceptionInfo* exception, const char* filename){
+int init(Image** image, ImageInfo** image_info, ExceptionInfo* exception, const char* filename){
 	GetExceptionInfo(exception);
 	*image_info = CloneImageInfo((ImageInfo *) NULL);
 
@@ -99,7 +100,8 @@ void init(Image** image, ImageInfo** image_info, ExceptionInfo* exception, const
 	if (exception->severity != UndefinedException)
 		CatchException(exception);
 	if (*image == (Image*) NULL)
-		exit(1);
+		return 0;
+	return 1;
 }
 void scale(Image** image, ImageInfo* image_info, ExceptionInfo* exception, int width, int height){
 	float scale_x = (float)((*image)->columns) / (float)(width);
@@ -142,6 +144,7 @@ struct option long_options[] ={
 	{"width", required_argument, 0, 'w'},
 	{"height", required_argument, 0, 'h'},
 	{"font", required_argument, 0, 'f'},
+	{"loop", optional_argument, 0, 'l'},
 	{0, 0, 0, 0}
 };
 
@@ -152,10 +155,12 @@ int main (int argc, char** argv) {
 	char description[500];
 	char image_url[500];
 	ExceptionInfo exception;
-	Image *image;
-	ImageInfo *image_info;
+	Image *image = NULL;
+	ImageInfo *image_info = NULL;
 	FILE* file;
 	int c;
+	char* font = NULL;
+	int loop_time = -1;
 
 #ifdef USE_X11
 	Display* d = XOpenDisplay(NULL);
@@ -165,9 +170,7 @@ int main (int argc, char** argv) {
 	int width = HEIGHT, height = HEIGHT;
 #endif
 
-	char* font = NULL;
-
-	while((c = getopt_long (argc, argv, "u:w:h:f:",long_options, 0)) != -1)
+	while((c = getopt_long (argc, argv, "u:w:h:f:l",long_options, 0)) != -1)
 		switch (c) {
 			case 'u':
 				url = optarg;
@@ -181,37 +184,47 @@ int main (int argc, char** argv) {
 			case 'f':
 				font = optarg;
 				break;
+			case 'l':
+				loop_time = atoi(optarg);
+				break;
+			}
+
+	do {
+		res = download(&mem, url);
+		if (res != 0)
+			continue;
+		if(!(file = fopen("File.html", "wb"))){
+			printf("Could not open file\n");
+			exit(1);
 		}
 
-	res = download(&mem, url);
-	if (res != 0)
-		return res;
-	if(!(file = fopen("File.html", "wb"))){
-		printf("Could not open file\n");
-		exit(1);
-	}
-	fwrite(mem.memory, mem.size, 1, file);
-	fclose(file);
+		fwrite(mem.memory, mem.size, 1, file);
+		fclose(file);
 
-	get_desc(mem, description);
-	get_url(mem, image_url);
-	res = download(&mem, image_url);
-	if (res != 0)
-		return res;
-	if(!(file = fopen("Image.png", "wb"))){
-		printf("Could not open file\n");
-		exit(1);
-	}
-	fwrite(mem.memory, mem.size, 1, file);
-	fclose(file);
+		get_desc(mem, description);
+		get_url(mem, image_url);
+		res = download(&mem, image_url);
+		if (res != 0)
+			continue;
+		if(!(file = fopen("Image.png", "wb"))){
+			printf("Could not open file\n");
+			exit(1);
+		}
+		fwrite(mem.memory, mem.size, 1, file);
+		fclose(file);
 
-	init(&image, &image_info, &exception, "Image.png");
-	scale(&image, image_info, &exception, width, height);
-	save(image, image_info, "Scaled_image.png");
-	excerpt(&image, image_info, &exception, width, height);
-	save(image, image_info, "Croped_image.png");
-	annotate(&image, image_info, &exception, description, font);
-	save(image, image_info, "Text_image.png");
+		if(!init(&image, &image_info, &exception, "Image.png"))
+			continue;
+		scale(&image, image_info, &exception, width, height);
+		save(image, image_info, "Scaled_image.png");
+		excerpt(&image, image_info, &exception, width, height);
+		save(image, image_info, "Croped_image.png");
+		annotate(&image, image_info, &exception, description, font);
+		save(image, image_info, "Text_image.png");
+
+		if(loop_time != -1)
+			sleep(loop_time);
+	} while(loop_time != -1);
 
 	return 0;
 }
