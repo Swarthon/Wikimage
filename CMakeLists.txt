@@ -5,6 +5,11 @@ project(wikimage)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 add_executable(wikimage src/wikimage.c src/image.c src/download.c src/string_manipulate.c)
 
+# Options
+option(USE_X11 "Use X11 to determine screen size" ON)
+set(IMAGE_WIDTH 1920 CACHE INT "Default image width when X11 is disable")
+set(IMAGE_HEIGHT 1080 CACHE INT "Default image height when X11 is disable")
+
 include_directories (include)
 configure_file (
 	"include/config.h.in"
@@ -36,9 +41,5 @@ endif (ImageMagick_FOUND)
 find_package(X11)
 if (X11_FOUND)
 	include_directories (${X11_INCLUDE_DIR})
-	target_link_libraries (wikimage -lX11)
-	option(USE_X11 ON)
-else ()
-	set(IMAGE_WIDTH 1920 CACHE INT "Image default width")
-	set(IMAGE_HEIGHT 1080 CACHE INT "Image default height")
+	target_link_libraries (wikimage ${X11_LIBRARIES})
 endif (X11_FOUND)
