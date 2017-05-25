@@ -4,6 +4,7 @@
   *   \ \ /\ / /| | |/ / | '_ ` _ \ / _` |/ _` |/ _ \
   *    \ V  V / | |   <| | | | | | | (_| | (_| |  __/
   *     \_/\_/  |_|_|\_\_|_| |_| |_|\__,_|\__, |\___|
+  *					  |___/
   *
   * File :	wikimage.c
   *
@@ -62,10 +63,10 @@ int main (int argc, char** argv) {
 	Screen*  s = DefaultScreenOfDisplay(d);
 	int width = s->width, height = s->height;
 #else
-	int width = HEIGHT, height = HEIGHT;
+	int width = WIDTH, height = HEIGHT;
 #endif
 
-	while((c = getopt_long (argc, argv, "u:w:h:f:l",long_options, 0)) != -1)
+	while((c = getopt_long (argc, argv, "u:w:h:f:l:",long_options, 0)) != -1)
 		switch (c) {
 			case 'u':
 				url = optarg;
