@@ -47,7 +47,11 @@ void annotate(Image** image, ImageInfo* image_info, ExceptionInfo* exception, ch
 	draw_info->pointsize = 35;
 	draw_info->gravity = SouthEastGravity;
 	draw_info->font = font;
+#ifdef HAVE_MAGICK_6
 	AnnotateImage(*image, draw_info);
+#else
+	AnnotateImage(*image, draw_info, exception);
+#endif
 }
 
 void save(Image* image, ImageInfo* image_info, const char* name){
