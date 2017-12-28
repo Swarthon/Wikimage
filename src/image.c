@@ -35,7 +35,7 @@ void annotate(Image** image, ImageInfo* image_info, ExceptionInfo* exception, ch
 	draw_info->undercolor.blue = 20000;
 	draw_info->undercolor.green = 20000;
 	draw_info->undercolor.red = 20000;
-	draw_info->undercolor.opacity = 10000;
+	draw_info->undercolor.alpha = 40003;
 	draw_info->fill.blue = 65535;
 	draw_info->fill.red = 65535;
 	draw_info->fill.green = 65535;
