@@ -29,7 +29,7 @@
 extern int init (
 	Image** image,
 	ImageInfo** image_info,
-	ExceptionInfo* exception,
+	ExceptionInfo** exception,
 	const char* filename
 );
 

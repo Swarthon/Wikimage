@@ -1,13 +1,13 @@
 #include "image.h"
 
-int init(Image** image, ImageInfo** image_info, ExceptionInfo* exception, const char* filename){
-	GetExceptionInfo(exception);
+int init(Image** image, ImageInfo** image_info, ExceptionInfo** exception, const char* filename){
+	*exception = AcquireExceptionInfo();
 	*image_info = CloneImageInfo((ImageInfo *) NULL);
 
 	(void) strcpy((*image_info)->filename, filename);
-	*image = ReadImage(*image_info, exception);
-	if (exception->severity != UndefinedException)
-		CatchException(exception);
+	*image = ReadImage(*image_info, *exception);
+	if ((*exception)->severity != UndefinedException)
+		CatchException(*exception);
 	if (*image == (Image*) NULL)
 		return 0;
 	return 1;

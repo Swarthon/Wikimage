@@ -50,7 +50,7 @@ int main (int argc, char** argv) {
 	char* url = "http://commons.wikimedia.org/wiki/Special:Random/File";
 	char description[500];
 	char image_url[500];
-	ExceptionInfo exception;
+	ExceptionInfo *exception;
 	Image *image = NULL;
 	ImageInfo *image_info = NULL;
 	FILE* file;
@@ -111,11 +111,11 @@ int main (int argc, char** argv) {
 
 		if(!init(&image, &image_info, &exception, "Image.png"))
 			continue;
-		scale(&image, image_info, &exception, width, height);
+		scale(&image, image_info, exception, width, height);
 		save(image, image_info, "Scaled_image.png");
-		excerpt(&image, image_info, &exception, width, height);
+		excerpt(&image, image_info, exception, width, height);
 		save(image, image_info, "Croped_image.png");
-		annotate(&image, image_info, &exception, description, font);
+		annotate(&image, image_info, exception, description, font);
 		save(image, image_info, "Text_image.png");
 
 		if(loop_time != -1)
