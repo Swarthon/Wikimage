@@ -17,8 +17,14 @@
 
 #include <string.h>
 
+/* The include path is different between version 6 and 7 of ImageMagick */
+#ifdef HAVE_MAGICK_6 
 #include <magick/MagickCore.h>
 #include <magick/draw.h>
+#else
+#include <MagickCore/MagickCore.h>
+#include <MagickCore/draw.h>
+#endif
 
 extern int init (
 	Image** image,
