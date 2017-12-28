@@ -29,13 +29,16 @@ void excerpt(Image** image, ImageInfo* image_info, ExceptionInfo* exception, int
 	*image = ExcerptImage(*image, &rectangle, exception);
 }
 
+/* Text rendreing parameters */
+#define WIKIMALPHA 40003
+
 void annotate(Image** image, ImageInfo* image_info, ExceptionInfo* exception, char* description, char* font){
 	DrawInfo *draw_info;
 	draw_info = CloneDrawInfo(image_info, (DrawInfo*)NULL);
 	draw_info->undercolor.blue = 20000;
 	draw_info->undercolor.green = 20000;
 	draw_info->undercolor.red = 20000;
-	draw_info->undercolor.alpha = 40003;
+	draw_info->undercolor.alpha = WIKIMALPHA;
 	draw_info->fill.blue = 65535;
 	draw_info->fill.red = 65535;
 	draw_info->fill.green = 65535;
