@@ -24,6 +24,8 @@ if (CURL_FOUND)
 endif (CURL_FOUND)
 
 # ImageMagick
+# We have to get the ImageMagick_VERSION_STRING for source compatibility
+# between 6 and 7
 find_package(ImageMagick REQUIRED)
 find_package(ImageMagick COMPONENTS MagickCore REQUIRED)
 if (ImageMagick_FOUND)
@@ -35,6 +37,9 @@ if (ImageMagick_FOUND)
 	add_definitions(-DMAGICKCORE_HDRI_ENABLE=0)
 	# Same for Quantum Depth value where 16 is selected
 	add_definitions(-DMAGICKCORE_QUANTUM_DEPTH=16)
+	if (${ImageMagick_VERSION_STRING} LESS 7)
+		add_definitions(-DHAVE_MAGICK_6)
+	endif (${ImageMagick_VERSION_STRING} LESS 7)
 endif (ImageMagick_FOUND)
 
 # X11
