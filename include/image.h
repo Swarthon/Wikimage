@@ -61,6 +61,9 @@ extern void save(
 	Image* image,
 	ImageInfo* image_info,
 	const char* name
+#ifndef HAVE_MAGICK_6
+	, ExceptionInfo* exception
+#endif
 );
 
 #endif // _IMAGE_H_

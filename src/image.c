@@ -54,7 +54,11 @@ void annotate(Image** image, ImageInfo* image_info, ExceptionInfo* exception, ch
 #endif
 }
 
-void save(Image* image, ImageInfo* image_info, const char* name){
+void save(Image* image, ImageInfo* image_info, const char* name
+#ifndef HAVE_MAGICK_6
+	  ,  ExceptionInfo* exception
+#endif
+	  ){
 	(void) strcpy(image->filename,name);
-	WriteImage(image_info, image);
+	WriteImage(image_info, image, exception);
 }
