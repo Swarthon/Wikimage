@@ -121,16 +121,17 @@ int main (int argc, char** argv) {
 		excerpt(&image, image_info, exception, width, height);
 
 #ifdef HAVE_MAGICK_6
-		save(image, image_info, "Scaled_image.png");
+		save(image, image_info, "Cropped_image.png");
 #else
-		save(image, image_info, "Scaled_image.png", exception);
+		save(image, image_info, "Cropped_image.png", exception);
 #endif /* HAVE_MAGICK_6 */
 
 		annotate(&image, image_info, exception, description, font);
+		
 #ifdef HAVE_MAGICK_6
-		save(image, image_info, "Scaled_image.png");
+		save(image, image_info, "Text_image.png");
 #else
-		save(image, image_info, "Scaled_image.png", exception);
+		save(image, image_info, "Text_image.png", exception);
 #endif /* HAVE_MAGICK_6 */
 
 		if(loop_time != -1)
