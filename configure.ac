@@ -2,8 +2,8 @@ AC_INIT([wikimage], [1.0], [bug-automake@gnu.org])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_PROG_CC
 AC_CONFIG_HEADERS([config.h])
-AC_CHECK_FUNCS([strchr], [strstr])
-AC_CHECK_HEADERS([stdlib.h], [string.h], [unistd.h])
+AC_CHECK_FUNCS(strchr strstr)
+AC_CHECK_HEADERS(stdlib.h string.h unistd.h)
 PKG_CHECK_MODULES(MAGICKCORE, [MagickCore >= 6.8.6])
 AC_SUBST(MAGICKCORE_CFLAGS)
 AC_FUNC_MALLOC
