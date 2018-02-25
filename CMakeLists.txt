@@ -10,7 +10,7 @@ option(USE_X11 "Use X11 to determine screen size" ON)
 set(IMAGE_WIDTH 1920 CACHE INT "Default image width when X11 is disable")
 set(IMAGE_HEIGHT 1080 CACHE INT "Default image height when X11 is disable")
 
-include_directories (include)
+include_directories (include ${PROJECT_BINARY_DIR}/include)
 configure_file (
 	"include/config.h.in"
 	"include/config.h"

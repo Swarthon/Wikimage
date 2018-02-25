@@ -38,7 +38,7 @@ void annotate(Image** image, ImageInfo* image_info, ExceptionInfo* exception, ch
 	draw_info->undercolor.blue = 20000;
 	draw_info->undercolor.green = 20000;
 	draw_info->undercolor.red = 20000;
-	draw_info->undercolor.alpha = WIKIMALPHA;
+	//draw_info->undercolor.alpha = WIKIMALPHA;
 	draw_info->fill.blue = 65535;
 	draw_info->fill.red = 65535;
 	draw_info->fill.green = 65535;
@@ -60,5 +60,9 @@ void save(Image* image, ImageInfo* image_info, const char* name
 #endif
 	  ){
 	(void) strcpy(image->filename,name);
-	WriteImage(image_info, image, exception);
+	WriteImage(image_info, image
+#ifndef HAVE_MAGICK_6
+                   , exception
+#endif
+                   );
 }
